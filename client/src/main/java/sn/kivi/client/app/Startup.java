@@ -17,6 +17,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sn.kivi.client.navigation.ContentNavigation;
 import sn.kivi.client.viewbinder.MainFrameViewBinder;
 
 /**
@@ -40,7 +41,7 @@ public class Startup extends Application {
         FXMLLoader loader = new FXMLLoader(Startup.class.getResource("/sn/kivi/resources/view/MainFrame.fxml"));
         viewController = new MainFrameViewBinder(clientContext);
         loader.setController(viewController);
-
+        ContentNavigation.setMainController(viewController);
         Scene scene = new Scene(loader.load());
         primaryStage.setScene(scene);
         primaryStage.show();

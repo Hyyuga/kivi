@@ -9,8 +9,8 @@ import com.canoo.dolphin.client.ClientContext;
 import com.canoo.dolphin.client.javafx.AbstractViewBinder;
 import com.canoo.dolphin.client.javafx.FXBinder;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import sn.kivi.client.navigation.ContentNavigation;
 import sn.kivi.common.model.MainFrameModel;
@@ -34,7 +34,7 @@ public class MainFrameViewBinder extends AbstractViewBinder<MainFrameModel>{
      *
      * @param node the vista node to be swapped in.
      */
-    public void setVista(Pane node) {
+    public void setVista(Node node) {
         contentHolder.getChildren().setAll(node);
     }
     
