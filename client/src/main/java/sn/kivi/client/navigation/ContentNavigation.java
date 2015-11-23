@@ -11,7 +11,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import sn.kivi.client.app.Startup;
 import sn.kivi.client.basis.viewbinder.SuchenDialogViewBinder;
-import sn.kivi.client.viewbinder.MainFrameViewBinder;
+import sn.zapp.client.controller.MasterViewBinder;
+import sn.zappi.client.app.Zapp;
 
 /**
  *
@@ -26,14 +27,18 @@ public class ContentNavigation {
     public static final String VISTA_2 = "vista2.fxml";
 
     /** The main application layout controller. */
-    private static MainFrameViewBinder mainController;
+//    private static MainFrameViewBinder mainController;
+    private static MasterViewBinder mainController;
 
     /**
      * Stores the main controller for later use in navigation tasks.
      *
      * @param mainController the main application layout controller.
      */
-    public static void setMainController(MainFrameViewBinder mainController) {
+//    public static void setMainController(MainFrameViewBinder mainController) {
+//        ContentNavigation.mainController = mainController;
+//    }
+     public static void setMainController(MasterViewBinder mainController) {
         ContentNavigation.mainController = mainController;
     }
 
@@ -58,7 +63,7 @@ public class ContentNavigation {
         try {
             URL url = ContentNavigation.class.getResource(fxml); 
             FXMLLoader loader = new FXMLLoader(url);
-            loader.setController(new SuchenDialogViewBinder(Startup.getClientContext()));
+            loader.setController(new SuchenDialogViewBinder(Zapp.getClientContext()));
             Pane scene = loader.load();
             mainController.setVista(scene);
             System.err.println("");

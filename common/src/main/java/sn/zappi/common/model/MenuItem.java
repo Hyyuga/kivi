@@ -13,24 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.canoo.dolphin.todo.pm;
+package sn.zappi.common.model;
 
-import com.canoo.dolphin.collections.ObservableList;
 import com.canoo.dolphin.mapping.DolphinBean;
 import com.canoo.dolphin.mapping.Property;
 
 @DolphinBean
-public class ToDoList {
+public class MenuItem {
 
-    private ObservableList<ToDoItem> items;
+    private Property<String> text;
 
-    private Property<String> newItemText;
-
-    public ObservableList<ToDoItem> getItems() {
-        return items;
+    public String getText() {
+        return text.get();
+    }
+    public void setText(String text) {
+        this.text.set(text);
+    }
+    public Property<String> getTextProperty() {
+        return text;
     }
 
-    public Property<String> getNewItemText() {
-        return newItemText;
+    @Override
+    public String toString() {
+        return text.get();
     }
 }

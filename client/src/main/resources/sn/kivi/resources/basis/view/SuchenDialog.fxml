@@ -89,6 +89,7 @@
                   <Insets right="5.0" />
                </GridPane.margin>
             </Button>
+            <Button fx:id="btnSave" mnemonicParsing="false" text="Save" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>

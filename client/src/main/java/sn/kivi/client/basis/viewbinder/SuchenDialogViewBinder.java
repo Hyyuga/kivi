@@ -17,33 +17,37 @@ import sn.kivi.common.basis.model.SuchenDialogModel;
  *
  * @author y9052
  */
-public class SuchenDialogViewBinder extends AbstractViewBinder<SuchenDialogModel>{
+public class SuchenDialogViewBinder extends AbstractViewBinder<SuchenDialogModel> {
 
     @FXML
     private TextField txtFieldKZ;
-    
+
     @FXML
     private TextField txtFieldEW;
-    
+
     @FXML
     private TextField txtFieldName;
-    
+
     @FXML
     private TextField txtFieldStrasse;
-    
+
     @FXML
     private TextField txtFieldOrt;
-    
+
     @FXML
     private TextField txtFieldLage;
-    
-     @FXML
+
+    @FXML
     private Button btnReset;
+
+    @FXML
+    private Button btnSave;
      
-    public SuchenDialogViewBinder(ClientContext clientContext){
+    
+    public SuchenDialogViewBinder(ClientContext clientContext) {
         super(clientContext, "SuchenDialogController");
     }
-    
+
     @Override
     protected void init() {
         FXBinder.bind(txtFieldKZ.textProperty()).bidirectionalTo(getModel().txtFieldKZProperty());
@@ -53,6 +57,7 @@ public class SuchenDialogViewBinder extends AbstractViewBinder<SuchenDialogModel
         FXBinder.bind(txtFieldOrt.textProperty()).bidirectionalTo(getModel().txtFieldOrtProperty());
         FXBinder.bind(txtFieldLage.textProperty()).bidirectionalTo(getModel().txtFieldLageProperty());
         btnReset.setOnAction(e -> invoke("reset"));
+        btnSave.setOnAction(e -> invoke("save"));
     }
-    
+
 }

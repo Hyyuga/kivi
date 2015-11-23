@@ -13,16 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.canoo.dolphin.todo.server;
+package sn.zapp.client.controller;
 
-import com.canoo.dolphin.server.spring.DolphinPlatformApplication;
-import org.springframework.boot.SpringApplication;
+import com.canoo.dolphin.client.javafx.FXBinder;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ListCell;
+import sn.zappi.common.model.MenuItem;
 
-@DolphinPlatformApplication
-public class ToDoServer {
+public class MenuItemCell extends ListCell<MenuItem> {
 
-    public static void main(String... args) {
-        SpringApplication.run(ToDoServer.class, args);
+    public MenuItemCell() {
     }
 
+    @Override
+    protected void updateItem(MenuItem item, boolean empty) {
+        super.updateItem(item, empty);
+        if(item != null) {
+            FXBinder.bind(textProperty()).to(item.getTextProperty());
+        }
+    }
 }
