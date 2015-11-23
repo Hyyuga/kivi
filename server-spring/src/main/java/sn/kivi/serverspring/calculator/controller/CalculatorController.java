@@ -9,8 +9,6 @@ import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.kivi.common.calculator.model.CalculatorModel;
 import sn.kivi.serverspring.calculator.persistence.entities.Calculator;
@@ -24,9 +22,6 @@ public class CalculatorController {
     @Autowired
     private CalculatorRepository repository;
     
-    @PersistenceContext 
-    private EntityManager em;
-            
     @PostConstruct
     public void init() {
         model.firstValueProperty().onChanged(e -> calc());
@@ -53,8 +48,6 @@ public class CalculatorController {
             }
             Calculator calc = new Calculator(valueA ,valueB);
             repository.save(calc);
-//            em.persist(calc);
-            Object cals = repository.findAll();
             model.resultProperty().set((valueA + valueB) + "");
         } catch (Exception e) {
             model.resultProperty().set("Error");

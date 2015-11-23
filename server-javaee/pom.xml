@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>sn.maven</groupId>
-            <artifactId>todo-example-server</artifactId>
+            <artifactId>server</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>

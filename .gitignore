@@ -1,0 +1,5 @@
+/common/target/
+/server/target/
+/server-spring/target/
+/client/target/
+/server-javaee/target/

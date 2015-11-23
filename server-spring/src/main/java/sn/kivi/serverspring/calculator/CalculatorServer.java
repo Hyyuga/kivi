@@ -9,17 +9,10 @@ import com.canoo.dolphin.server.spring.DolphinPlatformApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 
-//@EnableAutoConfiguration(exclude = {JndiConnectionFactoryAutoConfiguration.class,DataSourceAutoConfiguration.class,
-//                                    HibernateJpaAutoConfiguration.class,JpaRepositoriesAutoConfiguration.class,DataSourceTransactionManagerAutoConfiguration.class})
-
 @DolphinPlatformApplication
-//@ComponentScan("sn.kivi.server.calculator.controller")
 public class CalculatorServer extends SpringBootServletInitializer {
 
     public static void main(String[] args) throws Exception {
-//        EmbeddedDriver driver = new EmbeddedDriver();
-//        driver.toString();
-//       Class.forName("com.apache.derby.jdbc.ClientDriver");
         SpringApplication.run(new Class[]{CalculatorServer.class}, args);
     }
 }
