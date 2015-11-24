@@ -69,17 +69,6 @@ public class Startup extends Application {
     public static ClientContext getClientContext() {
         return clientContext;
     }
-
-//    @Override
-//    public void stop() throws Exception {
-//        super.stop();
-//        if(viewController != null) {
-//            viewController.destroy().get();
-//        }
-//        if(clientContext != null) {
-//            clientContext.disconnect().get();
-//        }
-//    }
     
     public static void main(String... args) {
         launch(args);

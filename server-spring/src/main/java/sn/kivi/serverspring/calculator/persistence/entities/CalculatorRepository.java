@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sn.kivi.serverspring.calculator.controller;
+package sn.kivi.serverspring.calculator.persistence.entities;
 
-import sn.kivi.serverspring.calculator.persistence.entities.Calculator;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +14,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CalculatorRepository extends CrudRepository<Calculator, Integer>{
-//    public List<Calculator> findAll(Integer result);
-//    Page<Calculator> findAll(Pageable page);
-//    List<Calculator> findByResult(Integer lastName);
 }
