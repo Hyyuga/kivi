@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sn.zapp.serverspring;
+package sn.zapp;
 
 import com.canoo.dolphin.server.spring.DolphinPlatformApplication;
 import org.springframework.boot.SpringApplication;

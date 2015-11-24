@@ -34,7 +34,7 @@ public class MainFrameViewBinder extends AbstractViewBinder<MainFrameModel>{
      *
      * @param node the vista node to be swapped in.
      */
-    public void setVista(Node node) {
+    public void setContent(Node node) {
         contentHolder.getChildren().setAll(node);
     }
     

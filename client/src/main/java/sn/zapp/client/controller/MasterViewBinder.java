@@ -9,11 +9,9 @@ import com.canoo.dolphin.client.ClientContext;
 import com.canoo.dolphin.client.javafx.AbstractViewBinder;
 import com.canoo.dolphin.client.javafx.FXWrapper;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import sn.kivi.client.navigation.ContentNavigation;
@@ -28,8 +26,6 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
 
 //    @FXML
 //    private TreeView<String> treeViewMenu;
-//    @FXML
-//    private final AnchorPane anchorMaster;
     @FXML
     private final SplitPane splitPaneMaster;
 
@@ -48,7 +44,7 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
         splitPaneMaster.getItems().add(stackPaneContent);
     }
 
-    public void setVista(Pane node) {
+    public void setContent(Pane node) {
         stackPaneContent.getChildren().setAll(node);
     }
 
@@ -64,12 +60,12 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
     protected void init() {
         ObservableList<MenuItem> list = FXWrapper.wrapList(getModel().getMenuItems());
 //        listViewMenu.setOnMouseClicked(event -> invoke("clicked"));
-        listViewMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                openFallSuchen();
-            }
-        });
+//        listViewMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                openFallSuchen();
+//            }
+//        });
         listViewMenu.setItems(list);
 
     }

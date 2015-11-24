@@ -12,7 +12,7 @@ import javafx.scene.layout.Pane;
 import sn.kivi.client.app.Startup;
 import sn.kivi.client.basis.viewbinder.SuchenDialogViewBinder;
 import sn.zapp.client.controller.MasterViewBinder;
-import sn.zappi.client.app.Zapp;
+import sn.zapp.client.app.Zapp;
 
 /**
  *
@@ -65,7 +65,7 @@ public class ContentNavigation {
             FXMLLoader loader = new FXMLLoader(url);
             loader.setController(new SuchenDialogViewBinder(Zapp.getClientContext()));
             Pane scene = loader.load();
-            mainController.setVista(scene);
+            mainController.setContent(scene);
             System.err.println("");
         } catch (IOException e) {
             e.printStackTrace();
