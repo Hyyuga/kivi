@@ -13,6 +13,7 @@ import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.SplitPane;
 import javafx.stage.Stage;
 import sn.kivi.client.navigation.ContentNavigation;
 import sn.zapp.client.controller.MasterViewBinder;
@@ -40,7 +41,9 @@ public class Zapp extends Application {
         viewController = new MasterViewBinder(clientContext);
         loader.setController(viewController);
         ContentNavigation.setMainController(viewController);
-        Scene scene = new Scene(loader.load());
+        SplitPane splitPaneMaster = (SplitPane)loader.load();
+        viewController.setSplitPane(splitPaneMaster);
+        Scene scene = new Scene(splitPaneMaster);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

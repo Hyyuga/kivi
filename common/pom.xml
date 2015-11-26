@@ -20,8 +20,30 @@
         <dependency>
             <groupId>com.canoo.dolphin-platform</groupId>
             <artifactId>dolphin-platform-core</artifactId>
-            <version>0.7.0-SNAPSHOT</version>
+            <version>0.6.1</version>
         </dependency>
     </dependencies>
+    
+<!--    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-remote-resources-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <includes>
+                        <include>**/*.JPG</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>-->
+    
     <name>common</name>
 </project>

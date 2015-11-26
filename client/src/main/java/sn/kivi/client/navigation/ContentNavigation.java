@@ -9,10 +9,9 @@ import java.io.IOException;
 import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
-import sn.kivi.client.app.Startup;
-import sn.kivi.client.basis.viewbinder.SuchenDialogViewBinder;
 import sn.zapp.client.controller.MasterViewBinder;
 import sn.zapp.client.app.Zapp;
+import sn.zapp.client.controller.MitgliederDialogViewBinder;
 
 /**
  *
@@ -63,10 +62,9 @@ public class ContentNavigation {
         try {
             URL url = ContentNavigation.class.getResource(fxml); 
             FXMLLoader loader = new FXMLLoader(url);
-            loader.setController(new SuchenDialogViewBinder(Zapp.getClientContext()));
+            loader.setController(new MitgliederDialogViewBinder(Zapp.getClientContext()));
             Pane scene = loader.load();
             mainController.setContent(scene);
-            System.err.println("");
         } catch (IOException e) {
             e.printStackTrace();
         }

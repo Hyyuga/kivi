@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface MitgliederRepository extends CrudRepository<Mitglieder, Integer>{
-    
+    Mitglieder findBynachname(String nachname);
 }

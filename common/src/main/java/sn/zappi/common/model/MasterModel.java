@@ -7,6 +7,7 @@ package sn.zappi.common.model;
 
 import com.canoo.dolphin.collections.ObservableList;
 import com.canoo.dolphin.mapping.DolphinBean;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -43,9 +44,25 @@ public class MasterModel {
 //        return menuItems;
 //    }
     
-    private ObservableList<MenuItem> menuItems;
+    private ObservableList<MenuItemEntry> menuItems;
 
-    public ObservableList<MenuItem> getMenuItems() {
+    public ObservableList<MenuItemEntry> getMenuItems() {
         return menuItems;
+    }
+    
+    private StackPane stackPaneContent;
+
+    /**
+     * @return the stackPaneContent
+     */
+    public StackPane getStackPaneContent() {
+        return stackPaneContent;
+    }
+
+    /**
+     * @param stackPaneContent the stackPaneContent to set
+     */
+    public void setStackPaneContent(StackPane stackPaneContent) {
+        this.stackPaneContent = stackPaneContent;
     }
 }

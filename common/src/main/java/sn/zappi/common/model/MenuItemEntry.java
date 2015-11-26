@@ -15,18 +15,26 @@
  */
 package sn.zappi.common.model;
 
-import com.canoo.dolphin.collections.ObservableList;
-import com.canoo.dolphin.impl.collections.ObservableArrayList;
 import com.canoo.dolphin.mapping.DolphinBean;
+import com.canoo.dolphin.mapping.Property;
 
 @DolphinBean
-public class MenuList {
+public class MenuItemEntry {
 
-    private ObservableList<MenuItemEntry> items;
+    private Property<String> text;
 
-    public ObservableList<MenuItemEntry> getItems() {
-        if(items == null)
-            return new ObservableArrayList<>();
-        return items;
+    public String getText() {
+        return text.get();
+    }
+    public void setText(String text) {
+        this.text.set(text);
+    }
+    public Property<String> getTextProperty() {
+        return text;
+    }
+
+    @Override
+    public String toString() {
+        return text.get();
     }
 }
