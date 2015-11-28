@@ -47,18 +47,6 @@ public class Zapp extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
-//    public void start(Stage primaryStage) throws Exception {
-//        CompletableFuture<ClientContext> connectionPromise = ClientContextFactory.connect(new JavaFXConfiguration("http://localhost:8080/todo-app/dolphin"));
-//        connectionPromise.thenAccept(context -> {
-//            clientContext = clientContext;
-//            viewController = new MasterViewBinder(context);
-//            ContentNavigation.setMainController(viewController);
-//            primaryStage.setScene(new Scene(viewController.getSplitPane()));
-//            primaryStage.show();
-//        });
-//    }
-    
     public static ClientContext getClientContext() {
         return clientContext;
     }

@@ -7,7 +7,6 @@ package sn.zappi.common.model;
 
 import com.canoo.dolphin.mapping.DolphinBean;
 import com.canoo.dolphin.mapping.Property;
-import java.sql.Date;
 import java.time.LocalDate;
 import javafx.scene.image.Image;
 
@@ -25,6 +24,8 @@ public class MitgliederDialogModel {
     private Property<String> txtFieldAdresse;
 
     private Property<LocalDate> datePickerGeb;
+    
+    private Property<String> dateString;
 
     private Property<Image> imageViewFoto;
 
@@ -40,12 +41,12 @@ public class MitgliederDialogModel {
         return txtFieldAdresse;
     }
 
-    public Property<LocalDate> gebDatePickerProperty() {
-        return datePickerGeb;
-    }
-    
     public Property<Image> imageViewFotoProperty() {
         return imageViewFoto;
+    }
+    
+    public Property<String> gebDateString() {
+        return dateString;
     }
 
     public String getTxtFieldVorname() {
@@ -59,9 +60,9 @@ public class MitgliederDialogModel {
     public String getTxtAdresse() {
         return txtFieldAdresseProperty().get();
     }
-
-    public LocalDate getGebDate() {
-        return gebDatePickerProperty().get();
+    
+    public String getTxtDateField() {
+        return gebDateString().get();
     }
 
     public Image getImageViewFoto() {
@@ -80,10 +81,12 @@ public class MitgliederDialogModel {
         txtFieldAdresseProperty().set(nameValue);
     }
     
-    public void setGebDate(LocalDate strasseValue) {
-        gebDatePickerProperty().set(strasseValue);
+    public void setDate(String dateString) {
+        gebDateString().set(dateString);
     }
+    
     public void setImageViewFoto(Image imageValue) {
         imageViewFotoProperty().set(imageValue);
     }
+    
 }

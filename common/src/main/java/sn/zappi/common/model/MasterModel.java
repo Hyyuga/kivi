@@ -16,34 +16,6 @@ import javafx.scene.layout.StackPane;
 @DolphinBean
 public class MasterModel {
     
-//    private TreeView<String> treeViewMenu;
-//    
-//    public TreeView<String> treeViewMenu(){
-//        return treeViewMenu;
-//    }
-//    
-//    public void setTreeview(TreeView<String> treeView){
-//        this.treeViewMenu = treeView;
-//    }
-    
-//    private MenuList menuList;
-//    
-//    public MenuList menuList(){
-//        return menuList;
-//    }
-//    
-//    public void setMenuList(MenuList menuList){
-//        this.menuList = menuList;
-//    }
-    
-//    private ListView<MenuItem> menuItems;
-//
-//    public ListView<MenuItem> getMenuItems() {
-//        if(menuItems == null)
-//            return new ListView<>();
-//        return menuItems;
-//    }
-    
     private ObservableList<MenuItemEntry> menuItems;
 
     public ObservableList<MenuItemEntry> getMenuItems() {

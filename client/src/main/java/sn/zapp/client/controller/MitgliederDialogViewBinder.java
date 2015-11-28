@@ -14,6 +14,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import sn.zapp.client.app.Zapp;
 import sn.zappi.common.model.MitgliederDialogModel;
 
 public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDialogModel> {
@@ -38,7 +39,6 @@ public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDia
     @FXML
     private Button btnSave;
 
-//    private TextField imageURI;
     public MitgliederDialogViewBinder(ClientContext clientContext) {
         super(clientContext, "MitgliederDialogController");
     }
@@ -48,45 +48,27 @@ public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDia
         FXBinder.bind(txtFieldVorname.textProperty()).bidirectionalTo(getModel().txtFieldVornameProperty());
         FXBinder.bind(txtFieldNachname.textProperty()).bidirectionalTo(getModel().txtFieldNachnameProperty());
         FXBinder.bind(txtFieldAdresse.textProperty()).bidirectionalTo(getModel().txtFieldAdresseProperty());
-        FXBinder.bind(datePickerGeb.valueProperty()).bidirectionalTo(getModel().gebDatePickerProperty());
-//        FXBinder.bind(imageURI.textProperty()).bidirectionalTo(getModel().imageViewFotoProperty());
+        FXBinder.bind(datePickerGeb.getEditor().textProperty()).bidirectionalTo(getModel().gebDateString());
         FXBinder.bind(imageViewFoto.imageProperty()).bidirectionalTo(getModel().imageViewFotoProperty());
         btnReset.setOnAction(e -> invoke("reset"));
         btnSave.setOnAction(e -> invoke("save"));
-        Image image = new Image(getClass().getResource("/sn/zapp/resources/pictures/lol.JPG").toString());
-        imageViewFoto.setImage(image);
-//        imageViewFoto.setStyle("-fx-background-color: BLACK");
-//        URI uri = null;
+//        Zapp.getClientContext().getBeanManager().create(beanClass)
+//        String imageSource = "http://imgur.com/gallery/UBLi3O3";
+
+//        ImageView imageView = ImageViewBuilder.create()
+//                .image(new Image(imageSource))
+//                .build();
+//        imageView.setImage(imageView.getImage());
+//        Image image;
 //        try {
-//            uri = new URI("/sn/zapp/resources/pictures/lol.JPG");
-//        } catch (URISyntaxException ex) {
+//            image = new Image(new URL("http://imgur.com/gallery/UBLi3O3").toString());
+//            imageViewFoto.setImage(image);
+//        } catch (MalformedURLException ex) {
 //            Logger.getLogger(MitgliederDialogViewBinder.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-//
-//        Rectangle clip = new Rectangle(
-//                imageViewFoto.getFitWidth(), imageViewFoto.getFitHeight()
-//        );
-//        clip.setArcWidth(20);
-//        clip.setArcHeight(20);
-//        imageViewFoto.setClip(clip);
-//
-//        // snapshot the rounded image.
-//        SnapshotParameters parameters = new SnapshotParameters();
-//        parameters.setFill(Color.TRANSPARENT);
-//        WritableImage image = imageViewFoto.snapshot(parameters, null);
-//
-//        // remove the rounding clip so that our effect can show through.
-//        imageViewFoto.setClip(null);
-//
-//        // apply a shadow effect.
-//        imageViewFoto.setEffect(new DropShadow(20, Color.BLACK));
-//
-//        // store the rounded image in the imageView.
-//        imageViewFoto.setImage(image);
-
-//        File file = new File(uri);
-//        Image image = new Image(file.toURI().toString());
-//        imageViewFoto.setImage(image);
+        
+        Image image = new Image(getClass().getResource("/sn/zapp/resources/pictures/lol.JPG").toString());
+        imageViewFoto.setImage(image);
     }
 
 }

@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -28,11 +27,12 @@ public class Mitglieder {
 
     private String vorname, nachname, adresse, imageurl;
     private Date geburtstag;
-    @Lob
-    private Blob imagedata;
-
-    @Lob
-    private java.sql.Blob imagedatablob;
+//    private LocalDate localdate;
+//    @Lob
+//    private Blob imagedata;
+//
+//    @Lob
+//    private java.sql.Blob imagedatablob;
 
     public Mitglieder() {
     }
@@ -43,7 +43,7 @@ public class Mitglieder {
         this.nachname = nachname;
         this.adresse = adresse;
         this.imageurl = imageUrl;
-        this.imagedata = imageData;
+//        this.imagedata = imageData;
     }
 
     /**
@@ -130,31 +130,45 @@ public class Mitglieder {
         this.imageurl = imageurl;
     }
 
-    /**
-     * @return the imagedata
-     */
-    public Blob getImagedata() {
-        return imagedata;
-    }
+//    /**
+//     * @return the imagedata
+//     */
+//    public Blob getImagedata() {
+//        return imagedata;
+//    }
+//
+//    /**
+//     * @param imagedata the imagedata to set
+//     */
+//    public void setImagedata(Blob imagedata) {
+//        this.imagedata = imagedata;
+//    }
+//
+//    /**
+//     * @return the imagedatablob
+//     */
+//    public java.sql.Blob getImagedatablob() {
+//        return imagedatablob;
+//    }
+//
+//    /**
+//     * @param imagedatablob the imagedatablob to set
+//     */
+//    public void setImagedatablob(java.sql.Blob imagedatablob) {
+//        this.imagedatablob = imagedatablob;
+//    }
 
-    /**
-     * @param imagedata the imagedata to set
-     */
-    public void setImagedata(Blob imagedata) {
-        this.imagedata = imagedata;
-    }
-
-    /**
-     * @return the imagedatablob
-     */
-    public java.sql.Blob getImagedatablob() {
-        return imagedatablob;
-    }
-
-    /**
-     * @param imagedatablob the imagedatablob to set
-     */
-    public void setImagedatablob(java.sql.Blob imagedatablob) {
-        this.imagedatablob = imagedatablob;
-    }
+//    /**
+//     * @return the localdate
+//     */
+//    public LocalDate getLocaldate() {
+//        return localdate;
+//    }
+//
+//    /**
+//     * @param localdate the localdate to set
+//     */
+//    public void setLocaldate(LocalDate localdate) {
+//        this.localdate = localdate;
+//    }
 }
