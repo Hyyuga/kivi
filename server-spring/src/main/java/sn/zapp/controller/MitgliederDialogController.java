@@ -11,13 +11,15 @@ import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
 import java.time.LocalDate;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.zapp.persistence.Mitglieder;
 import sn.zapp.persistence.MitgliederRepository;
-import sn.zapp.service.LocalDatePersistenceConverter;
-import sn.zapp.service.StringToLocalDatePersistenceConverter;
+import sn.zapp.peristence.converter.LocalDatePersistenceConverter;
+import sn.zapp.peristence.converter.StringToSQLDatePersistenceConverter;
+import sn.zapp.persistence.MitgliedErgebnisse;
 import sn.zappi.common.model.MitgliederDialogModel;
 
 /**
@@ -42,8 +44,8 @@ public class MitgliederDialogController {
     private LocalDatePersistenceConverter converter;
 
     @Inject
-    private StringToLocalDatePersistenceConverter converterString;
-    
+    private StringToSQLDatePersistenceConverter converterString;
+
     @PostConstruct
     public void init() {
         mitglied = repository.findBynachname("Naus");

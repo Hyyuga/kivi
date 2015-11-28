@@ -51,8 +51,8 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
         this.splitPaneMaster = pane;
     }
 
-    public void openFallSuchen() {
-        ContentNavigation.loadContent("/sn/zapp/resources/views/MitgliederDialog.fxml");
+    public void openMitgliederDetails() {
+        ContentNavigation.loadTabContents("/sn/zapp/resources/views/TabbedPane.fxml");
     }
     /**
      * @return the listViewMenu
@@ -77,8 +77,8 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
             MenuItemEntry item = o.getSelectionModel().getSelectedItem();
             int row = o.getSelectionModel().getSelectedIndex();
             //CONTROLLER_ACTION_CALL_ERROR_BEAN error
-            invoke("clicked", new Param("name", item.getText()), new Param("row", row));
-            openFallSuchen();
+//            invoke("clicked", new Param("name", item.getText()), new Param("row", row));
+            openMitgliederDetails();
         });
         
     }

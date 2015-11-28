@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sn.zapp.service;
+package sn.zapp.peristence.converter;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  */
 //@Converter(autoApply = true)
 @Service
-public class StringToLocalDatePersistenceConverter implements
+public class StringToSQLDatePersistenceConverter implements
         AttributeConverter<Date, String> {
 
     @Override
@@ -35,7 +35,7 @@ public class StringToLocalDatePersistenceConverter implements
         try {
             parsed = (java.util.Date) format.parse(entityValue);
         } catch (ParseException ex) {
-            Logger.getLogger(StringToLocalDatePersistenceConverter.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StringToSQLDatePersistenceConverter.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new Date(parsed.getTime());
     }

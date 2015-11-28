@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import sn.zapp.client.controller.MasterViewBinder;
 import sn.zapp.client.app.Zapp;
 import sn.zapp.client.controller.MitgliederDialogViewBinder;
+import sn.zapp.client.controller.TabbedPaneContentViewBinder;
 
 /**
  *
@@ -58,11 +59,12 @@ public class ContentNavigation {
      *
      * @param fxml the fxml file to be loaded.
      */
-    public static void loadContent(String fxml) {
+    public static void loadTabContents(String fxml) {
         try {
             URL url = ContentNavigation.class.getResource(fxml); 
             FXMLLoader loader = new FXMLLoader(url);
-            loader.setController(new MitgliederDialogViewBinder(Zapp.getClientContext()));
+//            loader.setController(new MitgliederDialogViewBinder(Zapp.getClientContext()));
+            loader.setController(new TabbedPaneContentViewBinder());
             Pane scene = loader.load();
             mainController.setContent(scene);
         } catch (IOException e) {

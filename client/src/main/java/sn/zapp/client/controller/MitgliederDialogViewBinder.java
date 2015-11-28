@@ -14,7 +14,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import sn.zapp.client.app.Zapp;
 import sn.zappi.common.model.MitgliederDialogModel;
 
 public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDialogModel> {
@@ -52,21 +51,6 @@ public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDia
         FXBinder.bind(imageViewFoto.imageProperty()).bidirectionalTo(getModel().imageViewFotoProperty());
         btnReset.setOnAction(e -> invoke("reset"));
         btnSave.setOnAction(e -> invoke("save"));
-//        Zapp.getClientContext().getBeanManager().create(beanClass)
-//        String imageSource = "http://imgur.com/gallery/UBLi3O3";
-
-//        ImageView imageView = ImageViewBuilder.create()
-//                .image(new Image(imageSource))
-//                .build();
-//        imageView.setImage(imageView.getImage());
-//        Image image;
-//        try {
-//            image = new Image(new URL("http://imgur.com/gallery/UBLi3O3").toString());
-//            imageViewFoto.setImage(image);
-//        } catch (MalformedURLException ex) {
-//            Logger.getLogger(MitgliederDialogViewBinder.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
         Image image = new Image(getClass().getResource("/sn/zapp/resources/pictures/lol.JPG").toString());
         imageViewFoto.setImage(image);
     }

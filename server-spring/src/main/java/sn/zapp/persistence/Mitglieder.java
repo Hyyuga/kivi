@@ -7,10 +7,15 @@ package sn.zapp.persistence;
 
 import com.mysql.jdbc.Blob;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +32,10 @@ public class Mitglieder {
 
     private String vorname, nachname, adresse, imageurl;
     private Date geburtstag;
+    
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "mitglied")
+    private Set<MitgliedErgebnisse> mitgliedErgebisse = new HashSet<MitgliedErgebnisse>();
+    
 //    private LocalDate localdate;
 //    @Lob
 //    private Blob imagedata;
@@ -171,4 +180,18 @@ public class Mitglieder {
 //    public void setLocaldate(LocalDate localdate) {
 //        this.localdate = localdate;
 //    }
+
+    /**
+     * @return the mitgliedErgebisse
+     */
+    public Set<MitgliedErgebnisse> getListeErgebisse() {
+        return mitgliedErgebisse;
+    }
+
+    /**
+     * @param mitgliedErgebisse the mitgliedErgebisse to set
+     */
+    public void setMitgliedErgebisse(Set<MitgliedErgebnisse> mitgliedErgebisse) {
+        this.mitgliedErgebisse = mitgliedErgebisse;
+    }
 }
