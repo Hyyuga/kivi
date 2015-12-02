@@ -10,16 +10,12 @@ import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
 import com.canoo.dolphin.server.Param;
-import com.canoo.dolphin.server.event.DolphinEventBus;
 import com.canoo.dolphin.server.event.TaskExecutor;
-import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import sn.zapp.persistence.Mitglieder;
 import sn.zapp.persistence.MitgliederRepository;
 import sn.zappi.common.model.MasterModel;
 import sn.zappi.common.model.MenuItemEntry;
-import sn.zappi.common.model.MitgliederDetailsModel;
 
 /**
  *
@@ -35,8 +31,8 @@ public class MasterController {
     private MitgliederRepository mitglieder;
 
     @Inject
-    private DolphinEventBus eventBus;
-    
+    private TaskExecutor taskExecutor;
+
     @PostConstruct
     public void init() {
         mitglieder.findAll().forEach(mitglied -> addMitgliedMenuItem(mitglied.getNachname()));
@@ -52,7 +48,7 @@ public class MasterController {
 
     @DolphinAction("clickedNameEntry")
     public void clickedNameEntry(@Param("name") MenuItemEntry entry) {
-        eventBus.publish("nameEvent", entry.getText());
-//        model.setSelectedEntry(entry);
+        taskExecutor.execute(MitgliederDetailsController.class, c -> c.fillModelData(entry.getText()));
+        taskExecutor.execute(MitgliederErgebnisController.class, c -> c.fillModelData(entry.getText()));
     }
 }

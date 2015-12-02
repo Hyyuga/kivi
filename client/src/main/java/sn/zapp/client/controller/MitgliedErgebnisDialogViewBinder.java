@@ -20,9 +20,6 @@ import sn.zappi.common.model.MitgliedErgebnisModel;
  */
 public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<MitgliedErgebnisModel> {
 
-    public MitgliedErgebnisDialogViewBinder(ClientContext clientContext) {
-        super(clientContext, "MitgliederErgebnisController");
-    }
     @FXML
     private TextField txtFieldKrefeld;
 
@@ -49,6 +46,10 @@ public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<Mitglie
 
     @FXML
     private Button btnSave;
+    
+    public MitgliedErgebnisDialogViewBinder(ClientContext clientContext) {
+        super(clientContext, "MitgliederErgebnisController");
+    }
 
     @Override
     protected void init() {

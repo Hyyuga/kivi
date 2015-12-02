@@ -9,14 +9,11 @@ import com.canoo.dolphin.client.ClientContext;
 import com.canoo.dolphin.client.javafx.AbstractViewBinder;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import sn.kivi.client.navigation.ContentNavigation;
 import sn.zapp.client.app.Zapp;
-import sn.zappi.common.model.MenuItemEntry;
 import sn.zappi.common.model.TabbedPaneContentModel;
 
 /**
@@ -30,8 +27,6 @@ public class TabbedPaneContentViewBinder extends AbstractViewBinder<TabbedPaneCo
 
     @FXML
     private Tab tabPaneMitgliedErgebnisse;
-
-    private MenuItemEntry entry;
 
     public TabbedPaneContentViewBinder(ClientContext clientContext) {
         super(clientContext, "TabbedPaneContentController");
@@ -54,17 +49,4 @@ public class TabbedPaneContentViewBinder extends AbstractViewBinder<TabbedPaneCo
         }
     }
 
-    /**
-     * @return the entry
-     */
-    public MenuItemEntry getEntry() {
-        return entry;
-    }
-
-    /**
-     * @param entry the entry to set
-     */
-    public void setEntry(MenuItemEntry entry) {
-        this.entry = entry;
-    }
 }

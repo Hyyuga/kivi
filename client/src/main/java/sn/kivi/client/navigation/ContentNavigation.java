@@ -64,7 +64,6 @@ public class ContentNavigation {
         try {
             URL url = ContentNavigation.class.getResource(fxml); 
             FXMLLoader loader = new FXMLLoader(url);
-//            loader.setController(new MitgliederDialogViewBinder(Zapp.getClientContext()));
             loader.setController(new TabbedPaneContentViewBinder(Zapp.getClientContext()));
             Pane scene = loader.load();
             mainController.setContent(scene);

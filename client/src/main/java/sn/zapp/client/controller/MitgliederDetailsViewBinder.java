@@ -38,6 +38,8 @@ public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDe
     @FXML
     private Button btnSave;
     
+    private MenuItemEntry mitglied;
+    
     public MitgliederDetailsViewBinder(ClientContext clientContext) {
         super(clientContext, "MitgliederDetailsController");
     }
@@ -53,6 +55,20 @@ public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDe
         btnSave.setOnAction(e -> invoke("save"));
 //        Image image = new Image(getClass().getResource("/sn/zapp/resources/pictures/lol.JPG").toString());
 //        imageViewFoto.setImage(image);
+    }
+
+    /**
+     * @return the mitglied
+     */
+    public MenuItemEntry getMitglied() {
+        return mitglied;
+    }
+
+    /**
+     * @param mitglied the mitglied to set
+     */
+    public void setMitglied(MenuItemEntry mitglied) {
+        this.mitglied = mitglied;
     }
 
 }

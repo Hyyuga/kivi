@@ -5,13 +5,10 @@
  */
 package sn.zapp.controller;
 
-import com.canoo.dolphin.event.Subscription;
 import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
 import com.canoo.dolphin.server.event.DolphinEventBus;
-import com.canoo.dolphin.server.event.Message;
-import com.canoo.dolphin.server.event.MessageListener;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import sn.zapp.persistence.Mitglieder;
@@ -44,9 +41,10 @@ public class MitgliederDetailsController {
     
     @PostConstruct
     public void init() {
-        eventBus.subscribe("nameEvent", (Message message) ->setSelectedMitglied((String) message.getData())).unsubscribe();
-//        String name = model.getMasterModel().getName().get();
-        setMitglied(repository.findBynachname("Naus"));
+    }
+    
+    public void fillModelData(String text){
+        setMitglied(repository.findBynachname(text));
         String dateString = converterString.convertToDatabaseColumn(getMitglied().getGeburtstag());
         model.setVorname(getMitglied().getVorname());
         model.setNachname(getMitglied().getNachname());
