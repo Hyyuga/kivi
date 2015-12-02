@@ -40,11 +40,9 @@ public class TabbedPaneContentViewBinder extends AbstractViewBinder<TabbedPaneCo
     @Override
     public void init() {
         try {
-            final MenuItemEntry entries = Zapp.getClientContext().getBeanManager().create(MenuItemEntry.class);
-            entries.setText("Nyaki");
             URL urlDetails = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederDialog.fxml");
             FXMLLoader loaderDetails = new FXMLLoader(urlDetails);
-            loaderDetails.setController(new MitgliederDetailsViewBinder(Zapp.getClientContext(), entries));
+            loaderDetails.setController(new MitgliederDetailsViewBinder(Zapp.getClientContext()));
             tabPaneMitgliedDetails.setContent(loaderDetails.load());
             URL urlErgebnis = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederErgebnis.fxml");
             FXMLLoader loaderErgebnis = new FXMLLoader(urlErgebnis);

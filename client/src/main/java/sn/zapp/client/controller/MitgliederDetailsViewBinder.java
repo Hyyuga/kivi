@@ -38,9 +38,8 @@ public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDe
     @FXML
     private Button btnSave;
     
-    public MitgliederDetailsViewBinder(ClientContext clientContext, MenuItemEntry entry) {
+    public MitgliederDetailsViewBinder(ClientContext clientContext) {
         super(clientContext, "MitgliederDetailsController");
-        getModel().setNameEntry(entry);
     }
 
     @Override
