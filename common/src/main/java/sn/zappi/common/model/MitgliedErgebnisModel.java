@@ -7,7 +7,6 @@ package sn.zappi.common.model;
 
 import com.canoo.dolphin.mapping.DolphinBean;
 import com.canoo.dolphin.mapping.Property;
-import java.math.BigDecimal;
 
 /**
  *
@@ -26,6 +25,7 @@ public class MitgliedErgebnisModel {
     private Property<String> strafen;
     private Property<String> tag;
 
+    private MenuItemEntry nameEntry;
     /**
      * @return the krefelder_partie
      */
@@ -150,6 +150,20 @@ public class MitgliedErgebnisModel {
      */
     public void setTag(Property<String> tag) {
         this.tag = tag;
+    }
+
+    /**
+     * @return the masterModel
+     */
+    public MenuItemEntry getNameEntry() {
+        return nameEntry;
+    }
+
+    /**
+     * @param nameEntry the masterModel to set
+     */
+    public void setNameEntry(MenuItemEntry nameEntry) {
+        this.nameEntry = nameEntry;
     }
 
 }

@@ -16,13 +16,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import sn.kivi.client.navigation.ContentNavigation;
 import sn.zapp.client.app.Zapp;
+import sn.zappi.common.model.MenuItemEntry;
 import sn.zappi.common.model.TabbedPaneContentModel;
 
 /**
  *
  * @author Steppo
  */
-public class TabbedPaneContentViewBinder implements Initializable{
+public class TabbedPaneContentViewBinder extends AbstractViewBinder<TabbedPaneContentModel> {
 
     @FXML
     private Tab tabPaneMitgliedDetails;
@@ -30,24 +31,42 @@ public class TabbedPaneContentViewBinder implements Initializable{
     @FXML
     private Tab tabPaneMitgliedErgebnisse;
 
-//    public TabbedPaneContentViewBinder(ClientContext clientContext) {
-//        super(clientContext, "TabbedPaneContentController");
-//    }
+    private MenuItemEntry entry;
+
+    public TabbedPaneContentViewBinder(ClientContext clientContext) {
+        super(clientContext, "TabbedPaneContentController");
+    }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        try{
-        URL urlDetails = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederDialog.fxml");
-        FXMLLoader loaderDetails = new FXMLLoader(urlDetails);
-        loaderDetails.setController(new MitgliederDialogViewBinder(Zapp.getClientContext()));
-        tabPaneMitgliedDetails.setContent(loaderDetails.load());
-         URL urlErgebnis = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederErgebnis.fxml");
-        FXMLLoader loaderErgebnis = new FXMLLoader(urlErgebnis);
-        loaderErgebnis.setController(new MitgliedErgebnisDialogViewBinder(Zapp.getClientContext()));
-        tabPaneMitgliedErgebnisse.setContent(loaderErgebnis.load());
+    public void init() {
+        try {
+            final MenuItemEntry entries = Zapp.getClientContext().getBeanManager().create(MenuItemEntry.class);
+            entries.setText("Nyaki");
+            URL urlDetails = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederDialog.fxml");
+            FXMLLoader loaderDetails = new FXMLLoader(urlDetails);
+            loaderDetails.setController(new MitgliederDetailsViewBinder(Zapp.getClientContext(), entries));
+            tabPaneMitgliedDetails.setContent(loaderDetails.load());
+            URL urlErgebnis = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederErgebnis.fxml");
+            FXMLLoader loaderErgebnis = new FXMLLoader(urlErgebnis);
+            loaderErgebnis.setController(new MitgliedErgebnisDialogViewBinder(Zapp.getClientContext()));
+            tabPaneMitgliedErgebnisse.setContent(loaderErgebnis.load());
 //        Pane scene = loader.load();
-        } catch (IOException e){
-            
+        } catch (IOException e) {
+
         }
+    }
+
+    /**
+     * @return the entry
+     */
+    public MenuItemEntry getEntry() {
+        return entry;
+    }
+
+    /**
+     * @param entry the entry to set
+     */
+    public void setEntry(MenuItemEntry entry) {
+        this.entry = entry;
     }
 }

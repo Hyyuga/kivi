@@ -12,11 +12,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import sn.zappi.common.model.MitgliederDialogModel;
+import sn.zappi.common.model.MenuItemEntry;
+import sn.zappi.common.model.MitgliederDetailsModel;
 
-public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDialogModel> {
+public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDetailsModel> {
 
     @FXML
     private TextField txtFieldVorname;
@@ -37,9 +37,10 @@ public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDia
 
     @FXML
     private Button btnSave;
-
-    public MitgliederDialogViewBinder(ClientContext clientContext) {
-        super(clientContext, "MitgliederDialogController");
+    
+    public MitgliederDetailsViewBinder(ClientContext clientContext, MenuItemEntry entry) {
+        super(clientContext, "MitgliederDetailsController");
+        getModel().setNameEntry(entry);
     }
 
     @Override
@@ -51,8 +52,8 @@ public class MitgliederDialogViewBinder extends AbstractViewBinder<MitgliederDia
         FXBinder.bind(imageViewFoto.imageProperty()).bidirectionalTo(getModel().imageViewFotoProperty());
         btnReset.setOnAction(e -> invoke("reset"));
         btnSave.setOnAction(e -> invoke("save"));
-        Image image = new Image(getClass().getResource("/sn/zapp/resources/pictures/lol.JPG").toString());
-        imageViewFoto.setImage(image);
+//        Image image = new Image(getClass().getResource("/sn/zapp/resources/pictures/lol.JPG").toString());
+//        imageViewFoto.setImage(image);
     }
 
 }

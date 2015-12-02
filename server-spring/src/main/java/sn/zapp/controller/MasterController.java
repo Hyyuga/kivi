@@ -10,14 +10,16 @@ import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
 import com.canoo.dolphin.server.Param;
+import com.canoo.dolphin.server.event.DolphinEventBus;
 import com.canoo.dolphin.server.event.TaskExecutor;
+import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import org.springframework.beans.factory.annotation.Autowired;
 import sn.zapp.persistence.Mitglieder;
 import sn.zapp.persistence.MitgliederRepository;
 import sn.zappi.common.model.MasterModel;
 import sn.zappi.common.model.MenuItemEntry;
+import sn.zappi.common.model.MitgliederDetailsModel;
 
 /**
  *
@@ -29,35 +31,28 @@ public class MasterController {
     @DolphinModel
     private MasterModel model;
 
-    @Autowired
+    @Inject
     private MitgliederRepository mitglieder;
 
+    @Inject
+    private DolphinEventBus eventBus;
+    
     @PostConstruct
     public void init() {
-        for (Mitglieder next : mitglieder.findAll()) {
-            add(next.getVorname());
-        }
+        mitglieder.findAll().forEach(mitglied -> addMitgliedMenuItem(mitglied.getNachname()));
     }
     @Inject
     private BeanManager beanManager;
 
-    @Inject
-    private TaskExecutor taskExecutor;
-
-    public void add(String item) {
-        taskExecutor.execute(MasterController.class, c -> c.onAdded(item));
+    private void addMitgliedMenuItem(String text) {
+        final MenuItemEntry nameEntry = beanManager.create(MenuItemEntry.class);
+        nameEntry.setText(text);
+        model.getMenuItems().add(nameEntry);
     }
 
-    private void onAdded(String text) {
-        final MenuItemEntry toDoItem = beanManager.create(MenuItemEntry.class);
-        toDoItem.setText(text);
-        model.getMenuItems().add(toDoItem);
+    @DolphinAction("clickedNameEntry")
+    public void clickedNameEntry(@Param("name") MenuItemEntry entry) {
+        eventBus.publish("nameEvent", entry.getText());
+//        model.setSelectedEntry(entry);
     }
-
-    @DolphinAction("clicked")
-    //CONTROLLER_ACTION_CALL_ERROR_BEAN error
-    public void clicked(@Param("name") String item, @Param("row") int row) {
-        model.getMenuItems().get(row).setText(item);
-    }
-
 }

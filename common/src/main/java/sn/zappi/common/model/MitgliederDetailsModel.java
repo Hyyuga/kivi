@@ -15,16 +15,16 @@ import javafx.scene.image.Image;
  * @author y9052
  */
 @DolphinBean
-public class MitgliederDialogModel {
+public class MitgliederDetailsModel {
 
+    private MenuItemEntry nameEntry;
+    
     private Property<String> txtFieldVorname;
 
     private Property<String> txtFieldNachname;
 
     private Property<String> txtFieldAdresse;
 
-    private Property<LocalDate> datePickerGeb;
-    
     private Property<String> dateString;
 
     private Property<Image> imageViewFoto;
@@ -87,6 +87,20 @@ public class MitgliederDialogModel {
     
     public void setImageViewFoto(Image imageValue) {
         imageViewFotoProperty().set(imageValue);
+    }
+
+    /**
+     * @return the masterModel
+     */
+    public MenuItemEntry getNameEntry() {
+        return nameEntry;
+    }
+
+    /**
+     * @param nameEntry the masterModel to set
+     */
+    public void setNameEntry(MenuItemEntry nameEntry) {
+        this.nameEntry = nameEntry;
     }
     
 }

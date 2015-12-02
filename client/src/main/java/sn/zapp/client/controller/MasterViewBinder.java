@@ -8,7 +8,12 @@ package sn.zapp.client.controller;
 import com.canoo.dolphin.client.ClientContext;
 import com.canoo.dolphin.client.Param;
 import com.canoo.dolphin.client.javafx.AbstractViewBinder;
+import com.canoo.dolphin.client.javafx.FXBinder;
 import com.canoo.dolphin.client.javafx.FXWrapper;
+import com.canoo.dolphin.impl.Converters;
+import com.canoo.dolphin.impl.PropertyImpl;
+import com.canoo.dolphin.impl.info.ClassPropertyInfo;
+import com.canoo.dolphin.mapping.Property;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -16,6 +21,8 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import org.opendolphin.core.Attribute;
+import org.opendolphin.core.client.ClientAttribute;
 import sn.kivi.client.navigation.ContentNavigation;
 import sn.zappi.common.model.MasterModel;
 import sn.zappi.common.model.MenuItemEntry;
@@ -51,7 +58,7 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
         this.splitPaneMaster = pane;
     }
 
-    public void openMitgliederDetails() {
+    public void openMitgliederTabs() {
         ContentNavigation.loadTabContents("/sn/zapp/resources/views/TabbedPane.fxml");
     }
     /**
@@ -76,9 +83,12 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
             ListView<MenuItemEntry> o = (ListView<MenuItemEntry>) event.getSource();
             MenuItemEntry item = o.getSelectionModel().getSelectedItem();
             int row = o.getSelectionModel().getSelectedIndex();
+//            FXBinder.bind(item.getTextProperty()).bidirectionalTo(getModel().getSelectedEntry().getTextProperty());
             //CONTROLLER_ACTION_CALL_ERROR_BEAN error
-//            invoke("clicked", new Param("name", item.getText()), new Param("row", row));
-            openMitgliederDetails();
+//            invoke("clicked", new Param("item", item));
+            invoke("clickedNameEntry", new Param("name", item));
+//            FXBinder.bind(item.getTextProperty()).bidirectionalTo(getModel().getName());
+            openMitgliederTabs();
         });
         
     }

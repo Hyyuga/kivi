@@ -5,10 +5,13 @@
  */
 package sn.zappi.common.model;
 
+import com.canoo.dolphin.mapping.DolphinBean;
+
 /**
  *
  * @author Steppo
  */
+@DolphinBean
 public class TabbedPaneContentModel {
     
 }

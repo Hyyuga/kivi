@@ -11,8 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import sn.zapp.client.controller.MasterViewBinder;
 import sn.zapp.client.app.Zapp;
-import sn.zapp.client.controller.MitgliederDialogViewBinder;
+import sn.zapp.client.controller.MitgliederDetailsViewBinder;
 import sn.zapp.client.controller.TabbedPaneContentViewBinder;
+import sn.zappi.common.model.MenuItemEntry;
 
 /**
  *
@@ -64,7 +65,7 @@ public class ContentNavigation {
             URL url = ContentNavigation.class.getResource(fxml); 
             FXMLLoader loader = new FXMLLoader(url);
 //            loader.setController(new MitgliederDialogViewBinder(Zapp.getClientContext()));
-            loader.setController(new TabbedPaneContentViewBinder());
+            loader.setController(new TabbedPaneContentViewBinder(Zapp.getClientContext()));
             Pane scene = loader.load();
             mainController.setContent(scene);
         } catch (IOException e) {

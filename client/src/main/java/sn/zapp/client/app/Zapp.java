@@ -26,8 +26,6 @@ public class Zapp extends Application {
 
     private static ClientContext clientContext;
     
-    private MasterViewBinder viewController;
-
     @Override
     public void init() throws Exception {
         ClientConfiguration config = new JavaFXConfiguration("http://localhost:8080/todo-app/dolphin");
@@ -38,7 +36,7 @@ public class Zapp extends Application {
     public void start(Stage primaryStage) throws Exception {
         URL url = Zapp.class.getResource("/sn/zapp/resources/views/Master.fxml"); 
         FXMLLoader loader = new FXMLLoader(url);
-        viewController = new MasterViewBinder(clientContext);
+        MasterViewBinder viewController = new MasterViewBinder(clientContext);
         loader.setController(viewController);
         ContentNavigation.setMainController(viewController);
         SplitPane splitPaneMaster = (SplitPane)loader.load();
