@@ -5,6 +5,7 @@
  */
 package sn.zappi.common.model;
 
+import com.canoo.dolphin.collections.ObservableList;
 import com.canoo.dolphin.mapping.DolphinBean;
 import com.canoo.dolphin.mapping.Property;
 
@@ -24,7 +25,8 @@ public class MitgliedErgebnisModel {
     private Property<String> alleNeune;
     private Property<String> strafen;
     private Property<String> tag;
-
+    private Property<Boolean> buttonDisabled;
+    private ObservableList<String> tageList;
     private MenuItemEntry nameEntry;
     /**
      * @return the krefelder_partie
@@ -164,6 +166,34 @@ public class MitgliedErgebnisModel {
      */
     public void setNameEntry(MenuItemEntry nameEntry) {
         this.nameEntry = nameEntry;
+    }
+
+    /**
+     * @return the buttonDisabled
+     */
+    public Property<Boolean> getButtonDisabled() {
+        return buttonDisabled;
+    }
+
+    /**
+     * @param buttonDisabled the buttonDisabled to set
+     */
+    public void setButtonDisabled(Property<Boolean> buttonDisabled) {
+        this.buttonDisabled = buttonDisabled;
+    }
+
+    /**
+     * @return the tagAuswahl
+     */
+    public ObservableList<String> getTagAuswahl() {
+        return tageList;
+    }
+
+    /**
+     * @param tagAuswahl the tagAuswahl to set
+     */
+    public void setTagAuswahl(ObservableList<String> tagAuswahl) {
+        this.tageList = tagAuswahl;
     }
 
 }

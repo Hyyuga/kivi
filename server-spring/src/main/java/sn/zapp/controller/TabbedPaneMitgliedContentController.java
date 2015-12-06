@@ -7,6 +7,6 @@ package sn.zapp.controller;
 
 import com.canoo.dolphin.server.DolphinController;
 
-@DolphinController("TabbedPaneContentController")
-public class TabbedPaneContentController {
+@DolphinController("TabbedPaneMitgliedContentController")
+public class TabbedPaneMitgliedContentController {
 }

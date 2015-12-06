@@ -11,9 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import sn.zapp.client.controller.MasterViewBinder;
 import sn.zapp.client.app.Zapp;
-import sn.zapp.client.controller.MitgliederDetailsViewBinder;
-import sn.zapp.client.controller.TabbedPaneContentViewBinder;
-import sn.zappi.common.model.MenuItemEntry;
+import sn.zapp.client.controller.GesamtErgebnisViewBinder;
+import sn.zapp.client.controller.TabbedPaneGesamtContentViewBinder;
+import sn.zapp.client.controller.TabbedPaneMitgliedContentViewBinder;
 
 /**
  *
@@ -60,11 +60,13 @@ public class ContentNavigation {
      *
      * @param fxml the fxml file to be loaded.
      */
-    public static void loadTabContents(String fxml) {
+    public static void loadMitgliederTabContents(String fxml, boolean gesamt) {
         try {
             URL url = ContentNavigation.class.getResource(fxml); 
             FXMLLoader loader = new FXMLLoader(url);
-            loader.setController(new TabbedPaneContentViewBinder(Zapp.getClientContext()));
+            if(gesamt)
+                loader.setController(new GesamtErgebnisViewBinder(Zapp.getClientContext()));
+            else loader.setController(new TabbedPaneMitgliedContentViewBinder(Zapp.getClientContext()));
             Pane scene = loader.load();
             mainController.setContent(scene);
         } catch (IOException e) {

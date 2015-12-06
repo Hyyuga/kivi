@@ -33,12 +33,14 @@ public class MasterController {
     @Inject
     private TaskExecutor taskExecutor;
 
-    @PostConstruct
-    public void init() {
-        mitglieder.findAll().forEach(mitglied -> addMitgliedMenuItem(mitglied.getNachname()));
-    }
     @Inject
     private BeanManager beanManager;
+
+    @PostConstruct
+    public void init() {
+        addMitgliedMenuItem("Gesamt");
+        mitglieder.findAll().forEach(mitglied -> addMitgliedMenuItem(mitglied.getNachname()));
+    }
 
     private void addMitgliedMenuItem(String text) {
         final MenuItemEntry nameEntry = beanManager.create(MenuItemEntry.class);
@@ -48,7 +50,10 @@ public class MasterController {
 
     @DolphinAction("clickedNameEntry")
     public void clickedNameEntry(@Param("name") MenuItemEntry entry) {
-        taskExecutor.execute(MitgliederDetailsController.class, c -> c.fillModelData(entry.getText()));
-        taskExecutor.execute(MitgliederErgebnisController.class, c -> c.fillModelData(entry.getText()));
+        if (!entry.getText().equals("Gesamt")) {
+            taskExecutor.execute(MitgliederDetailsController.class, c -> c.fillModelData(entry.getText()));
+            taskExecutor.execute(MitgliederErgebnisController.class, c -> c.getSpieltage(entry.getText()));
+        }else taskExecutor.execute(GesamtErgebnisController.class, c -> c.getFilter());
+
     }
 }

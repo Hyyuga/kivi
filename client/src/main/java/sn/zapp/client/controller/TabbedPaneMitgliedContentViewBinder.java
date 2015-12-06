@@ -14,13 +14,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tab;
 import sn.kivi.client.navigation.ContentNavigation;
 import sn.zapp.client.app.Zapp;
-import sn.zappi.common.model.TabbedPaneContentModel;
+import sn.zappi.common.model.TabbedPaneMitgliedContentModel;
 
 /**
  *
  * @author Steppo
  */
-public class TabbedPaneContentViewBinder extends AbstractViewBinder<TabbedPaneContentModel> {
+public class TabbedPaneMitgliedContentViewBinder extends AbstractViewBinder<TabbedPaneMitgliedContentModel> {
 
     @FXML
     private Tab tabPaneMitgliedDetails;
@@ -28,8 +28,8 @@ public class TabbedPaneContentViewBinder extends AbstractViewBinder<TabbedPaneCo
     @FXML
     private Tab tabPaneMitgliedErgebnisse;
 
-    public TabbedPaneContentViewBinder(ClientContext clientContext) {
-        super(clientContext, "TabbedPaneContentController");
+    public TabbedPaneMitgliedContentViewBinder(ClientContext clientContext) {
+        super(clientContext, "TabbedPaneMitgliedContentController");
     }
 
     @Override
@@ -43,7 +43,6 @@ public class TabbedPaneContentViewBinder extends AbstractViewBinder<TabbedPaneCo
             FXMLLoader loaderErgebnis = new FXMLLoader(urlErgebnis);
             loaderErgebnis.setController(new MitgliedErgebnisDialogViewBinder(Zapp.getClientContext()));
             tabPaneMitgliedErgebnisse.setContent(loaderErgebnis.load());
-//        Pane scene = loader.load();
         } catch (IOException e) {
 
         }

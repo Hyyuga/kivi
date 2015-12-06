@@ -6,10 +6,18 @@
 package sn.zapp.client.controller;
 
 import com.canoo.dolphin.client.ClientContext;
+import com.canoo.dolphin.client.Param;
 import com.canoo.dolphin.client.javafx.AbstractViewBinder;
 import com.canoo.dolphin.client.javafx.FXBinder;
+import com.canoo.dolphin.client.javafx.FXWrapper;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import sn.zappi.common.model.MitgliedErgebnisModel;
@@ -21,10 +29,13 @@ import sn.zappi.common.model.MitgliedErgebnisModel;
 public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<MitgliedErgebnisModel> {
 
     @FXML
+    private ComboBox<String> comboBoxAuswahl;
+
+    @FXML
     private TextField txtFieldKrefeld;
 
     @FXML
-    private TextField txtFieldBla;
+    private TextField txtFieldIdiot;
 
     @FXML
     private TextField txtFieldGesamt;
@@ -42,11 +53,14 @@ public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<Mitglie
     private TextField txtFieldTore;
 
     @FXML
+    private TextField txtFieldKraenze;
+
+    @FXML
     private Button btnReset;
 
     @FXML
     private Button btnSave;
-    
+
     public MitgliedErgebnisDialogViewBinder(ClientContext clientContext) {
         super(clientContext, "MitgliederErgebnisController");
     }
@@ -54,12 +68,26 @@ public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<Mitglie
     @Override
     protected void init() {
         FXBinder.bind(txtFieldGesamt.textProperty()).bidirectionalTo(getModel().getGesamt());
-        FXBinder.bind(txtFieldBla.textProperty()).bidirectionalTo(getModel().getIdiotenKegeln());
+        FXBinder.bind(txtFieldIdiot.textProperty()).bidirectionalTo(getModel().getIdiotenKegeln());
         FXBinder.bind(txtFieldKrefeld.textProperty()).bidirectionalTo(getModel().getKrefelderPartie());
         FXBinder.bind(txtFieldNeune.textProperty()).bidirectionalTo(getModel().getAlleNeune());
         FXBinder.bind(txtFieldPudel.textProperty()).bidirectionalTo(getModel().getPudel());
         FXBinder.bind(txtFieldTore.textProperty()).bidirectionalTo(getModel().getTore());
         FXBinder.bind(datePickerTag.getEditor().textProperty()).bidirectionalTo(getModel().getTag());
+        FXBinder.bind(txtFieldKraenze.textProperty()).bidirectionalTo(getModel().getKraenze());
+        ObservableList<String> list = FXWrapper.wrapList(getModel().getTagAuswahl());
+        comboBoxAuswahl.setItems(list);
+        comboBoxAuswahl.valueProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue ov, String oldValue, String newValue) {
+//                System.out.println("t" +oldValue);
+//                System.out.println("t1"+ newValue);
+                invoke("fillModelData", new Param("tag", newValue));
+            }
+        });
+        BooleanProperty buttonDisabled = new SimpleBooleanProperty();
+        buttonDisabled.bind(txtFieldGesamt.textProperty().isEmpty());
+        btnSave.disableProperty().bind(buttonDisabled);
         btnReset.setOnAction(e -> invoke("reset"));
         btnSave.setOnAction(e -> invoke("save"));
     }

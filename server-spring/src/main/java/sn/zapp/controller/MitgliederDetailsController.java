@@ -8,7 +8,6 @@ package sn.zapp.controller;
 import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
-import com.canoo.dolphin.server.event.DolphinEventBus;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import sn.zapp.persistence.Mitglieder;
@@ -32,9 +31,6 @@ public class MitgliederDetailsController {
     @Inject
     private StringToSQLDatePersistenceConverter converterString;
 
-    @Inject
-    private DolphinEventBus eventBus;
-    
     private Mitglieder mitglied = null;
     
     private String selectedMitglied = null;

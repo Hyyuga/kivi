@@ -51,9 +51,11 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
         this.splitPaneMaster = pane;
     }
 
-    public void openMitgliederTabs() {
-        ContentNavigation.loadTabContents("/sn/zapp/resources/views/TabbedPane.fxml");
+    public void openMitgliederTabs(boolean gesamt) {
+        if(gesamt)ContentNavigation.loadMitgliederTabContents("/sn/zapp/resources/views/GesamtErgebnis.fxml", gesamt);
+        else ContentNavigation.loadMitgliederTabContents("/sn/zapp/resources/views/MitgliederTabbedPane.fxml", gesamt);
     }
+
     /**
      * @return the listViewMenu
      */
@@ -75,9 +77,9 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
         listViewMenu.setOnMouseClicked((MouseEvent event) -> {
             ListView<MenuItemEntry> o = (ListView<MenuItemEntry>) event.getSource();
             MenuItemEntry item = o.getSelectionModel().getSelectedItem();
-            openMitgliederTabs();
+            openMitgliederTabs(item.getText().equalsIgnoreCase("gesamt"));
             invoke("clickedNameEntry", new Param("name", item));
         });
-        
+
     }
 }

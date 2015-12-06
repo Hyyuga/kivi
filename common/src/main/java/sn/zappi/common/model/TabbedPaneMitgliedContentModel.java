@@ -12,6 +12,6 @@ import com.canoo.dolphin.mapping.DolphinBean;
  * @author Steppo
  */
 @DolphinBean
-public class TabbedPaneContentModel {
+public class TabbedPaneMitgliedContentModel {
     
 }
