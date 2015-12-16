@@ -6,24 +6,20 @@
 package sn.zapp.controller;
 
 import com.canoo.dolphin.BeanManager;
-import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
-import com.canoo.dolphin.server.Param;
 import com.canoo.dolphin.server.event.TaskExecutor;
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import sn.zapp.persistence.MitgliedErgebnisse;
 import sn.zapp.persistence.Mitglieder;
 import sn.zapp.persistence.MitgliederRepository;
+import sn.zappi.common.model.ChartData;
 import sn.zappi.common.model.GesamtErgebnisModel;
 
 @DolphinController("GesamtErgebnisController")
@@ -45,6 +41,7 @@ public class GesamtErgebnisController {
 
     @PostConstruct
     public void init() {
+        model.getSelectedFilter().onChanged(e -> fillModelData(e.getNewValue()));
         rawFilterData = new HashMap();
         for (Mitglieder mitglieder : repository.findAll()) {
             getFilterFields(MitgliedErgebnisse.class).forEach(field -> {
@@ -54,7 +51,6 @@ public class GesamtErgebnisController {
                 rawFilterData.get(mitglieder).put(field, getFilterResult(mitglieder, field));
             });
         }
-        System.out.println("");
     }
 
     private Integer getFilterResult(Mitglieder mitglied, String filter) {
@@ -86,42 +82,20 @@ public class GesamtErgebnisController {
         model.getData().clear();
     }
 
-    @DolphinAction
-    public void fillModelData(@Param("filter") String filter) {
+    public void fillModelData(String filter) {
         model.getData().clear();
         taskExecutor.execute(GesamtErgebnisController.class, e -> {
-            final Series<String, Integer> series = beanManager.create(XYChart.Series.class);
             rawFilterData.entrySet().stream().map((mitgliedToFilterResultEntry) -> {
-                final XYChart.Data<String, Integer> datas = beanManager.create(XYChart.Data.class);
+                ChartData data = beanManager.create(ChartData.class);
                 String datax = mitgliedToFilterResultEntry.getKey().getVorname() + " " + mitgliedToFilterResultEntry.getKey().getNachname();
-                datas.setXValue(datax);
+                data.setCategory(datax);
                 Integer datay = mitgliedToFilterResultEntry.getValue().get(filter);
-                datas.setYValue(datay);
-                return datas;
-            }).forEach((datas) -> {
-                series.getData().add(datas);
+                data.setValue(datay);
+                return data;
+            }).forEach((data) -> {
+                model.getData().add(data);
             });
-            model.getData().add(series);
         });
 
-    }
-
-    private XYChart.Series<String, Integer> getChartData() {
-        Integer aValue = 17;
-        Series<String, Integer> aSeries = beanManager.create(XYChart.Series.class);
-        aSeries.setName("a");
-        XYChart.Data<String, Integer> data = beanManager.create(XYChart.Data.class);
-        XYChart.Data<String, Integer> data1 = beanManager.create(XYChart.Data.class);
-        XYChart.Data<String, Integer> data2 = beanManager.create(XYChart.Data.class);
-        data.setXValue("David Fiederichs");
-        data.setYValue(aValue);
-        data2.setXValue("Steffen Naus");
-        data2.setYValue(aValue);
-        data1.setXValue("Martin Nyaki");
-        data1.setYValue(aValue);
-        aSeries.getData().add(data);
-        aSeries.getData().add(data1);
-        aSeries.getData().add(data2);
-        return aSeries;
     }
 }

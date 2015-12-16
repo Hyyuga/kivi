@@ -7,15 +7,16 @@ package sn.zappi.common.model;
 
 import com.canoo.dolphin.collections.ObservableList;
 import com.canoo.dolphin.mapping.DolphinBean;
-import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Series;
+import com.canoo.dolphin.mapping.Property;
 
 @DolphinBean
 public class GesamtErgebnisModel {
 
     private ObservableList<String> filter;
 
-    private ObservableList<XYChart.Series<String, Integer>> data;
+    private ObservableList<ChartData> data;
+    
+    private Property<String> selectedFilter;
 
     /**
      * @return the filter
@@ -34,15 +35,29 @@ public class GesamtErgebnisModel {
     /**
      * @return the data
      */
-    public ObservableList<XYChart.Series<String, Integer>> getData() {
+    public ObservableList<ChartData> getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(ObservableList<XYChart.Series<String, Integer>> data) {
+    public void setData(ObservableList<ChartData> data) {
         this.data = data;
+    }
+
+    /**
+     * @return the selectedFilter
+     */
+    public Property<String> getSelectedFilter() {
+        return selectedFilter;
+    }
+
+    /**
+     * @param selectedFilter the selectedFilter to set
+     */
+    public void setSelectedFilter(Property<String> selectedFilter) {
+        this.selectedFilter = selectedFilter;
     }
 
 }
