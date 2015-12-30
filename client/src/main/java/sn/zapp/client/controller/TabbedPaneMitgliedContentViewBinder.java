@@ -34,18 +34,18 @@ public class TabbedPaneMitgliedContentViewBinder extends AbstractViewBinder<Tabb
 
     @Override
     public void init() {
-        try {
-            URL urlDetails = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederDialog.fxml");
-            FXMLLoader loaderDetails = new FXMLLoader(urlDetails);
-            loaderDetails.setController(new MitgliederDetailsViewBinder(Zapp.getClientContext()));
-            tabPaneMitgliedDetails.setContent(loaderDetails.load());
-            URL urlErgebnis = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederErgebnis.fxml");
-            FXMLLoader loaderErgebnis = new FXMLLoader(urlErgebnis);
-            loaderErgebnis.setController(new MitgliedErgebnisDialogViewBinder(Zapp.getClientContext()));
-            tabPaneMitgliedErgebnisse.setContent(loaderErgebnis.load());
-        } catch (IOException e) {
-
-        }
+//        try {
+//            URL urlDetails = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederDialog.fxml");
+//            FXMLLoader loaderDetails = new FXMLLoader(urlDetails);
+//            loaderDetails.setController(new MitgliederDetailsViewBinder(Zapp.getClientContext()));
+//            tabPaneMitgliedDetails.setContent(loaderDetails.load());
+//            URL urlErgebnis = ContentNavigation.class.getResource("/sn/zapp/resources/views/MitgliederErgebnis.fxml");
+//            FXMLLoader loaderErgebnis = new FXMLLoader(urlErgebnis);
+//            loaderErgebnis.setController(new MitgliedErgebnisDialogViewBinder(Zapp.getClientContext()));
+//            tabPaneMitgliedErgebnisse.setContent(loaderErgebnis.load());
+//        } catch (IOException e) {
+//
+//        }
     }
 
 }

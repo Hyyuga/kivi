@@ -20,13 +20,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import sn.zappi.common.model.MitgliedErgebnisModel;
+import sn.zappi.common.model.MitgliedErgebnis;
 
 /**
  *
  * @author Steppo
  */
-public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<MitgliedErgebnisModel> {
+public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<MitgliedErgebnis> {
 
     @FXML
     private ComboBox<String> comboBoxAuswahl;
@@ -77,11 +77,10 @@ public class MitgliedErgebnisDialogViewBinder extends AbstractViewBinder<Mitglie
         FXBinder.bind(txtFieldKraenze.textProperty()).bidirectionalTo(getModel().getKraenze());
         ObservableList<String> list = FXWrapper.wrapList(getModel().getTagAuswahl());
         comboBoxAuswahl.setItems(list);
+        //TODO: hier noch selected tag ins model und darauf das onchanged event im cotroller anbringen
         comboBoxAuswahl.valueProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue ov, String oldValue, String newValue) {
-//                System.out.println("t" +oldValue);
-//                System.out.println("t1"+ newValue);
                 invoke("fillModelData", new Param("tag", newValue));
             }
         });

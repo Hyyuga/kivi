@@ -5,11 +5,15 @@
  */
 package sn.zapp.controller;
 
+import com.canoo.dolphin.collections.ObservableList;
+import com.canoo.dolphin.impl.collections.ObservableArrayList;
 import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
 import com.canoo.dolphin.server.Param;
+import com.canoo.dolphin.server.event.DolphinEventBus;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -19,7 +23,7 @@ import sn.zapp.persistence.MitgliedErgebnisse;
 import sn.zapp.persistence.MitgliedErgebnisseRepository;
 import sn.zapp.persistence.Mitglieder;
 import sn.zapp.persistence.MitgliederRepository;
-import sn.zappi.common.model.MitgliedErgebnisModel;
+import sn.zappi.common.model.MitgliedErgebnis;
 
 /**
  *
@@ -29,7 +33,7 @@ import sn.zappi.common.model.MitgliedErgebnisModel;
 public class MitgliederErgebnisController {
 
     @DolphinModel
-    private MitgliedErgebnisModel model;
+    private MitgliedErgebnis model;
 
     @Autowired
     private MitgliederRepository mitgliedRepository;
@@ -46,12 +50,23 @@ public class MitgliederErgebnisController {
 
     private String selectedMitglied = null;
 
+    @Inject
+    private DolphinEventBus eventbus;
+
+    private List list = new ObservableArrayList();
+
     @PostConstruct
     public void init() {
+//        eventbus.subscribe("mitglieder", e -> addMitglieder((ObservableList<String>) e.getData()));
+//        System.out.println("sn.zapp.controller.MitgliederErgebnisController.init()");
     }
 
     private void addSpielTag(String text) {
         model.getTagAuswahl().add(text);
+    }
+
+    private void addMitglieder(ObservableList<String> text) {
+        list.addAll(text);
     }
 
     public void getSpieltage(String text) {

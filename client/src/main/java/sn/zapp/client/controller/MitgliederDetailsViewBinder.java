@@ -8,15 +8,18 @@ package sn.zapp.client.controller;
 import com.canoo.dolphin.client.ClientContext;
 import com.canoo.dolphin.client.javafx.AbstractViewBinder;
 import com.canoo.dolphin.client.javafx.FXBinder;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import sn.kivi.client.util.ViewState;
 import sn.zappi.common.model.MenuItemEntry;
-import sn.zappi.common.model.MitgliederDetailsModel;
+import sn.zappi.common.model.MitgliederDetails;
 
-public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDetailsModel> {
+public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDetails> {
 
     @FXML
     private TextField txtFieldVorname;
@@ -40,8 +43,11 @@ public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDe
     
     private MenuItemEntry mitglied;
     
-    public MitgliederDetailsViewBinder(ClientContext clientContext) {
+    private ViewState viewState;
+    
+    public MitgliederDetailsViewBinder(ClientContext clientContext, ViewState state) {
         super(clientContext, "MitgliederDetailsController");
+        viewState = state;
     }
 
     @Override
@@ -51,8 +57,18 @@ public class MitgliederDetailsViewBinder extends AbstractViewBinder<MitgliederDe
         FXBinder.bind(txtFieldAdresse.textProperty()).bidirectionalTo(getModel().txtFieldAdresseProperty());
         FXBinder.bind(datePickerGeb.getEditor().textProperty()).bidirectionalTo(getModel().gebDateString());
         FXBinder.bind(imageViewFoto.imageProperty()).bidirectionalTo(getModel().imageViewFotoProperty());
+        
+        
+        txtFieldAdresse.setDisable(viewState == ViewState.Member);
+        txtFieldNachname.setDisable(viewState == ViewState.Member);
+        txtFieldVorname.setDisable(viewState == ViewState.Member);
+        datePickerGeb.setDisable(viewState == ViewState.Member);
+        btnSave.setVisible(viewState != ViewState.Member);
+        btnReset.setVisible(viewState != ViewState.Member);
         btnReset.setOnAction(e -> invoke("reset"));
         btnSave.setOnAction(e -> invoke("save"));
+        
+        
 //        Image image = new Image(getClass().getResource("/sn/zapp/resources/pictures/lol.JPG").toString());
 //        imageViewFoto.setImage(image);
     }

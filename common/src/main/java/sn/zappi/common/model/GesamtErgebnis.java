@@ -10,7 +10,7 @@ import com.canoo.dolphin.mapping.DolphinBean;
 import com.canoo.dolphin.mapping.Property;
 
 @DolphinBean
-public class GesamtErgebnisModel {
+public class GesamtErgebnis {
 
     private ObservableList<String> filter;
 

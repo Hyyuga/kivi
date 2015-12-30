@@ -14,7 +14,7 @@ import com.canoo.dolphin.mapping.Property;
  * @author Steppo
  */
 @DolphinBean
-public class MitgliedErgebnisModel {
+public class MitgliedErgebnis {
 
     private Property<String> krefelderPartie;
     private Property<String> idiotenKegeln;
@@ -27,7 +27,6 @@ public class MitgliedErgebnisModel {
     private Property<String> tag;
     private Property<Boolean> buttonDisabled;
     private ObservableList<String> tageList;
-    private MenuItemEntry nameEntry;
     /**
      * @return the krefelder_partie
      */
@@ -152,20 +151,6 @@ public class MitgliedErgebnisModel {
      */
     public void setTag(Property<String> tag) {
         this.tag = tag;
-    }
-
-    /**
-     * @return the masterModel
-     */
-    public MenuItemEntry getNameEntry() {
-        return nameEntry;
-    }
-
-    /**
-     * @param nameEntry the masterModel to set
-     */
-    public void setNameEntry(MenuItemEntry nameEntry) {
-        this.nameEntry = nameEntry;
     }
 
     /**

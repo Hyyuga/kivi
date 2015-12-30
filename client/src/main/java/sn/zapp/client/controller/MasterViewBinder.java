@@ -6,34 +6,42 @@
 package sn.zapp.client.controller;
 
 import com.canoo.dolphin.client.ClientContext;
-import com.canoo.dolphin.client.Param;
 import com.canoo.dolphin.client.javafx.AbstractViewBinder;
-import com.canoo.dolphin.client.javafx.FXWrapper;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SplitPane;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import sn.kivi.client.navigation.ContentNavigation;
-import sn.zappi.common.model.MasterModel;
-import sn.zappi.common.model.MenuItemEntry;
+import sn.kivi.client.util.ViewState;
+import sn.zappi.common.model.Master;
 
 /**
  *
  * @author Steppo
  */
-public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
-
-    @FXML
-    private SplitPane splitPaneMaster;
+public class MasterViewBinder extends AbstractViewBinder<Master> {
 
     @FXML
     private StackPane stackPaneContent;
 
     @FXML
-    private ListView<MenuItemEntry> listViewMenu;
+    private Menu menuMember;
+
+    @FXML
+    private Menu menuResult;
+
+    @FXML
+    private MenuItem menuItemCreateMitglied;
+
+    @FXML
+    private MenuItem menuItemCreateSpieltag;
+
+    @FXML
+    private Menu menuCreate;
+
+    private ViewState viewState = null;
 
     public MasterViewBinder(ClientContext clientContext) {
         super(clientContext, "MasterController");
@@ -43,43 +51,75 @@ public class MasterViewBinder extends AbstractViewBinder<MasterModel> {
         stackPaneContent.getChildren().setAll(node);
     }
 
-    public SplitPane getSplitPane() {
-        return splitPaneMaster;
-    }
-
-    public void setSplitPane(SplitPane pane) {
-        this.splitPaneMaster = pane;
-    }
-
-    public void openMitgliederTabs(boolean gesamt) {
-        if(gesamt)ContentNavigation.loadMitgliederTabContents("/sn/zapp/resources/views/GesamtErgebnis.fxml", gesamt);
-        else ContentNavigation.loadMitgliederTabContents("/sn/zapp/resources/views/MitgliederTabbedPane.fxml", gesamt);
-    }
-
-    /**
-     * @return the listViewMenu
-     */
-    public ListView<MenuItemEntry> getListViewMenu() {
-        return listViewMenu;
-    }
-
-    /**
-     * @param listViewMenu the listViewMenu to set
-     */
-    public void setListViewMenu(ListView<MenuItemEntry> listViewMenu) {
-        this.listViewMenu = listViewMenu;
+    public void manageContentCreation(boolean gesamt, ViewState state) {
+        if (gesamt) {
+            ContentNavigation.loadContent("/sn/zapp/resources/views/GesamtErgebnis.fxml", gesamt, state);
+        } else if (state == ViewState.Member) {
+            ContentNavigation.loadContent("/sn/zapp/resources/views/MitgliederDetails.fxml", gesamt, state);
+        } else {
+            ContentNavigation.loadContent("/sn/zapp/resources/views/MitgliederErgebnis.fxml", gesamt, state);
+        }
     }
 
     @Override
     protected void init() {
-        ObservableList<MenuItemEntry> list = FXWrapper.wrapList(getModel().getMenuItems());
-        getListViewMenu().setItems(list);
-        listViewMenu.setOnMouseClicked((MouseEvent event) -> {
-            ListView<MenuItemEntry> o = (ListView<MenuItemEntry>) event.getSource();
-            MenuItemEntry item = o.getSelectionModel().getSelectedItem();
-            openMitgliederTabs(item.getText().equalsIgnoreCase("gesamt"));
-            invoke("clickedNameEntry", new Param("name", item));
+        createViewMenu();
+        initCreateMenu();
+    }
+
+    private void createViewMenu() {
+        for (String menuItem : getModel().getMenuItems()) {
+            menuResult.getItems().add(createViewMenuItem(menuItem, ViewState.Result));
+            if (!menuItem.equalsIgnoreCase("gesamt")) {
+                menuMember.getItems().add(createViewMenuItem(menuItem, ViewState.Member));
+            }
+        }
+    }
+
+    private MenuItem createViewMenuItem(String item, ViewState state) {
+        MenuItem result = new MenuItem(item);
+        result.setOnAction(event -> {
+
+            MenuItem o = (MenuItem) event.getSource();
+            String selectedItem = o.getText();
+            boolean changeView = (getModel().getSelectedEntry() == null
+                    || (getModel().getSelectedEntry().equalsIgnoreCase("gesamt") && !selectedItem.equalsIgnoreCase("gesamt"))
+                    || (!getModel().getSelectedEntry().equalsIgnoreCase("gesamt") && selectedItem.equalsIgnoreCase("gesamt"))
+                    || viewState == null
+                    || viewState != state);
+
+            if (changeView) {
+                manageContentCreation(selectedItem.equalsIgnoreCase("gesamt"), state);
+            }
+            viewState = state;
+            getModel().setSelectedEntry(selectedItem);
+        });
+        return result;
+    }
+
+//    private MenuItem createMemberMenuItem(String item, ViewState state) {
+//        MenuItem result = new MenuItem(item);
+//        result.setOnAction(event -> {
+//            MenuItem o = (MenuItem) event.getSource();
+//            String selectedItem = o.getText();
+//            boolean changeView = (getModel().getSelectedEntry() == null
+//                    || (getModel().getSelectedEntry().equalsIgnoreCase("gesamt") && !selectedItem.equalsIgnoreCase("gesamt"))
+//                    || (!getModel().getSelectedEntry().equalsIgnoreCase("gesamt") && selectedItem.equalsIgnoreCase("gesamt")));
+//
+//            if (changeView) {
+//                manageContentCreation(selectedItem.equalsIgnoreCase("gesamt"), state);
+//            }
+//            getModel().setSelectedEntry(selectedItem);
+//        });
+//        return result;
+//    }
+    private void initCreateMenu() {
+        menuItemCreateMitglied.setOnAction(event -> {
+
         });
 
+        menuItemCreateSpieltag.setOnAction(event -> {
+
+        });
     }
 }

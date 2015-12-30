@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:id="splitPaneErgebnisse" dividerPositions="0.26421404682274247" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <ListView fx:id="listViewSpielTage" prefHeight="200.0" prefWidth="200.0" />
+      <StackPane fx:id="stackPaneContent" prefHeight="150.0" prefWidth="200.0" />
+   </items>
+</SplitPane>

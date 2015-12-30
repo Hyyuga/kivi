@@ -16,9 +16,9 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import sn.kivi.client.util.FXWrapper2;
 import sn.zappi.common.model.ChartData;
-import sn.zappi.common.model.GesamtErgebnisModel;
+import sn.zappi.common.model.GesamtErgebnis;
 
-public class GesamtErgebnisViewBinder extends AbstractViewBinder<GesamtErgebnisModel> {
+public class GesamtErgebnisViewBinder extends AbstractViewBinder<GesamtErgebnis> {
 
     @FXML
     private ComboBox<String> comboBoxFilter;
@@ -32,6 +32,8 @@ public class GesamtErgebnisViewBinder extends AbstractViewBinder<GesamtErgebnisM
 
     @Override
     protected void init() {
+        barChart.setAnimated(false);
+        
         XYChart.Series<String, Integer> townCountSeries = new XYChart.Series<>();
         barChart.dataProperty().get().add(townCountSeries);
         townCountSeries.setData(FXWrapper2.wrapList(getModel().getData(), new DataConverter()));

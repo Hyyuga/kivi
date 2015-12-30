@@ -7,7 +7,6 @@ package sn.zappi.common.model;
 
 import com.canoo.dolphin.mapping.DolphinBean;
 import com.canoo.dolphin.mapping.Property;
-import java.time.LocalDate;
 import javafx.scene.image.Image;
 
 /**
@@ -15,10 +14,8 @@ import javafx.scene.image.Image;
  * @author y9052
  */
 @DolphinBean
-public class MitgliederDetailsModel {
+public class MitgliederDetails {
 
-    private MenuItemEntry nameEntry;
-    
     private Property<String> txtFieldVorname;
 
     private Property<String> txtFieldNachname;
@@ -87,20 +84,6 @@ public class MitgliederDetailsModel {
     
     public void setImageViewFoto(Image imageValue) {
         imageViewFotoProperty().set(imageValue);
-    }
-
-    /**
-     * @return the masterModel
-     */
-    public MenuItemEntry getNameEntry() {
-        return nameEntry;
-    }
-
-    /**
-     * @param nameEntry the masterModel to set
-     */
-    public void setNameEntry(MenuItemEntry nameEntry) {
-        this.nameEntry = nameEntry;
     }
     
 }

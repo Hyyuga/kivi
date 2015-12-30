@@ -6,16 +6,14 @@
 package sn.zapp.controller;
 
 import com.canoo.dolphin.BeanManager;
-import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
-import com.canoo.dolphin.server.Param;
+import com.canoo.dolphin.server.event.DolphinEventBus;
 import com.canoo.dolphin.server.event.TaskExecutor;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import sn.zapp.persistence.MitgliederRepository;
-import sn.zappi.common.model.MasterModel;
-import sn.zappi.common.model.MenuItemEntry;
+import sn.zappi.common.model.Master;
 
 /**
  *
@@ -25,7 +23,7 @@ import sn.zappi.common.model.MenuItemEntry;
 public class MasterController {
 
     @DolphinModel
-    private MasterModel model;
+    private Master model;
 
     @Inject
     private MitgliederRepository mitglieder;
@@ -36,24 +34,31 @@ public class MasterController {
     @Inject
     private BeanManager beanManager;
 
+    @Inject
+    private DolphinEventBus eventbus;
+    
     @PostConstruct
     public void init() {
         addMitgliedMenuItem("Gesamt");
+        model.selectedEntry().onChanged(e -> {
+            clickedNameEntry(model.selectedEntry().get());
+        });
         mitglieder.findAll().forEach(mitglied -> addMitgliedMenuItem(mitglied.getNachname()));
+        //hier vorerst noch nach dem laden der view das selecteditem on change benutzen um mit dem taskexecutor die andren controller mit den membern zu füllen
+//        eventbus.publish("mitglieder", model.getMenuItems());
     }
 
     private void addMitgliedMenuItem(String text) {
-        final MenuItemEntry nameEntry = beanManager.create(MenuItemEntry.class);
-        nameEntry.setText(text);
-        model.getMenuItems().add(nameEntry);
+        model.getMenuItems().add(text);
     }
 
-    @DolphinAction("clickedNameEntry")
-    public void clickedNameEntry(@Param("name") MenuItemEntry entry) {
-        if (!entry.getText().equals("Gesamt")) {
-            taskExecutor.execute(MitgliederDetailsController.class, c -> c.fillModelData(entry.getText()));
-            taskExecutor.execute(MitgliederErgebnisController.class, c -> c.getSpieltage(entry.getText()));
-        }else taskExecutor.execute(GesamtErgebnisController.class, c -> c.getFilter());
+    public void clickedNameEntry(String entry) {
+        if (!entry.equals("Gesamt")) {
+            taskExecutor.execute(MitgliederDetailsController.class, c -> c.fillModelData(entry));
+            taskExecutor.execute(MitgliederErgebnisController.class, c -> c.getSpieltage(entry));
+        } else {
+            taskExecutor.execute(GesamtErgebnisController.class, c -> c.getFilter());
+        }
 
     }
 }

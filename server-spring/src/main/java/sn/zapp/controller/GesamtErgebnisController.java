@@ -20,13 +20,13 @@ import sn.zapp.persistence.MitgliedErgebnisse;
 import sn.zapp.persistence.Mitglieder;
 import sn.zapp.persistence.MitgliederRepository;
 import sn.zappi.common.model.ChartData;
-import sn.zappi.common.model.GesamtErgebnisModel;
+import sn.zappi.common.model.GesamtErgebnis;
 
 @DolphinController("GesamtErgebnisController")
 public class GesamtErgebnisController {
 
     @DolphinModel
-    private GesamtErgebnisModel model;
+    private GesamtErgebnis model;
 
     @Inject
     private MitgliederRepository repository;

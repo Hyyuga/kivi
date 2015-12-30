@@ -8,12 +8,13 @@ package sn.zapp.controller;
 import com.canoo.dolphin.server.DolphinAction;
 import com.canoo.dolphin.server.DolphinController;
 import com.canoo.dolphin.server.DolphinModel;
+import com.canoo.dolphin.server.event.DolphinEventBus;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import sn.zapp.persistence.Mitglieder;
 import sn.zapp.persistence.MitgliederRepository;
 import sn.zapp.peristence.converter.StringToSQLDatePersistenceConverter;
-import sn.zappi.common.model.MitgliederDetailsModel;
+import sn.zappi.common.model.MitgliederDetails;
 
 /**
  *
@@ -23,11 +24,14 @@ import sn.zappi.common.model.MitgliederDetailsModel;
 public class MitgliederDetailsController {
 
     @DolphinModel
-    private MitgliederDetailsModel model;
+    private MitgliederDetails model;
     
     @Inject
     private MitgliederRepository repository;
 
+    @Inject
+    private DolphinEventBus eventbus;
+    
     @Inject
     private StringToSQLDatePersistenceConverter converterString;
 

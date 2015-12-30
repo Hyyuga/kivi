@@ -7,9 +7,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="splitPaneMaster" dividerPositions="0.26421404682274247" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
-   <items>
-      <ListView fx:id="listViewMenu" prefHeight="200.0" prefWidth="200.0" />
-      <StackPane fx:id="stackPaneContent" prefHeight="150.0" prefWidth="200.0" />
-   </items>
-</SplitPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu fx:id="menuMember" mnemonicParsing="false" text="Mitglieder" />
+          <Menu fx:id="menuCreate" mnemonicParsing="false" text="Anlegen">
+            <items>
+              <MenuItem fx:id="menuItemCreateMitglied" mnemonicParsing="false" text="Create Mitglied" />
+                  <MenuItem fx:id="menuItemCreateSpieltag" mnemonicParsing="false" text="Create Spieltag" />
+            </items>
+          </Menu>
+          <Menu fx:id="menuResult" mnemonicParsing="false" text="Ergebnisse" />
+        </menus>
+      </MenuBar>
+      <StackPane fx:id="stackPaneContent" layoutX="107.0" layoutY="25.0" prefHeight="375.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+   </children>
+</AnchorPane>

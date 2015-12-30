@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import sn.kivi.client.util.ViewState;
 import sn.zapp.client.controller.MasterViewBinder;
 import sn.zapp.client.app.Zapp;
 import sn.zapp.client.controller.GesamtErgebnisViewBinder;
-import sn.zapp.client.controller.TabbedPaneGesamtContentViewBinder;
+import sn.zapp.client.controller.MitgliedErgebnisDialogViewBinder;
+import sn.zapp.client.controller.MitgliederDetailsViewBinder;
 import sn.zapp.client.controller.TabbedPaneMitgliedContentViewBinder;
 
 /**
@@ -28,7 +30,6 @@ public class ContentNavigation {
     public static final String VISTA_2 = "vista2.fxml";
 
     /** The main application layout controller. */
-//    private static MainFrameViewBinder mainController;
     private static MasterViewBinder mainController;
 
     /**
@@ -36,9 +37,6 @@ public class ContentNavigation {
      *
      * @param mainController the main application layout controller.
      */
-//    public static void setMainController(MainFrameViewBinder mainController) {
-//        ContentNavigation.mainController = mainController;
-//    }
      public static void setMainController(MasterViewBinder mainController) {
         ContentNavigation.mainController = mainController;
     }
@@ -60,13 +58,16 @@ public class ContentNavigation {
      *
      * @param fxml the fxml file to be loaded.
      */
-    public static void loadMitgliederTabContents(String fxml, boolean gesamt) {
+    public static void loadContent(String fxml, boolean gesamt, ViewState state) {
         try {
             URL url = ContentNavigation.class.getResource(fxml); 
             FXMLLoader loader = new FXMLLoader(url);
             if(gesamt)
                 loader.setController(new GesamtErgebnisViewBinder(Zapp.getClientContext()));
-            else loader.setController(new TabbedPaneMitgliedContentViewBinder(Zapp.getClientContext()));
+            else if(state == ViewState.Member)
+                loader.setController(new MitgliederDetailsViewBinder(Zapp.getClientContext(), state));
+            else if(state == ViewState.Result)
+                loader.setController(new MitgliedErgebnisDialogViewBinder(Zapp.getClientContext()));
             Pane scene = loader.load();
             mainController.setContent(scene);
         } catch (IOException e) {
